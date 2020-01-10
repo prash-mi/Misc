@@ -1,49 +1,42 @@
 package com.misc;
+/*
+Given 4 threads each having int array  of different size... threads should print their elements one by one sequentially
+
+Eg
+t1 has [1, 5 ,7, 10, 11]
+t2 has [2 , 6 , 8]
+t3 has [5, 9, 14]
+t4 has [3, 4]
+Output should be
+1 2 5 3 5 6 9 4 7 8 14 10 11
+
+ */
 
 public class PrintSyncMultiThread {
+    static Thread[] threads;
+
     public static void main(String[] args){
         int[][] arrays = new int[4][];
         arrays[0] = new int[]{1, 5, 7, 10, 11};
         arrays[1] = new int[]{2 , 6 , 8};
         arrays[2] = new int[]{5, 9, 14};
         arrays[3] = new int[]{3,4};
+            printSync(arrays);
 
-        printSync(arrays);
+            //Ouput
+
     }
 
     static void printSync(int[][] arrays){
-        SyncThread.Lock lock = new SyncThread.Lock();
+        int numAry = arrays.length;//number of arrays or number of threads
+        Torch torch = new Torch(numAry);
 
-        int numAry = arrays.length;//number of arrays
-
-        Thread[] threads = new Thread[numAry];
+        threads= new Thread[numAry];
 
         //initialize the threads
         for (int i = 0; i < numAry; i++){
-            threads[i] = new SyncThread.Runner(arrays[i], lock);// pass array to the respective threads
-        }
-
-        //start the threads
-        for (int i = 0; i < numAry; i++){
-            ((SyncThread.Runner)threads[i]).next = i < numAry-1 ? threads[i+1]: threads[0]; // set the next thread's ref in a circular fashion
-
-            ((SyncThread.Runner)threads[i]).prev = i == 0 ? threads[numAry-1]: threads[i-1]; // set the prev thread's ref in a circular fashion
-
-            // threads[i].start();//start the thread
-        }
-        //  synchronized(threads[numAry-1]) {
-        // threads[numAry-1].notify();
-        //   }
-
-        for(int i = 1; i < numAry; i++){
+            threads[i] = new Runner(arrays[i], torch, i);// pass array to the respective threads
             threads[i].start();//start the thread
-        }
-
-        //the only object on which the lock isnt held is the last thread's reference and the first thread isnt yet started
-
-        synchronized( threads[numAry-1]) {
-            threads[0].start();
-            threads[numAry-1].notify();
         }
 
     }
@@ -53,31 +46,23 @@ public class PrintSyncMultiThread {
         int[] array;
         int cur = 0;
         Torch torch;
+        final  int myId;
 
 
         @Override
         public void run() {
 
-            while (true){
+            while (cur < array.length){//while all the elements in the current array arent printed
+                synchronized(torch) {
 
-                try {
-                    synchronized(torch) {
-                        if (cur < array.length) {
-                            System.out.println(array[cur++]);
-                        }
-
-                        this.notify();
-
-                        next.wait();
+                    if(torch.threadId == this.myId){
+                        torch.next();
+                        System.out.print(array[cur++] + " ");
+                    }else if(! threads[torch.threadId].isAlive()){//see of thread with torch.threadId is live, else do torch.next() on its behalf
+                        torch.next();
                     }
 
-
-
-
-                    // lock.notifyAll();
-
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
+                    torch.notify();//notify other threads to try their luck
                 }
 
             }
@@ -87,17 +72,26 @@ public class PrintSyncMultiThread {
 
         }
 
-        public Runner(int[] ary, SyncThread.Lock lock){
+        public Runner(int[] ary,Torch torch, int id){
             this.array = ary;
-            this.lock = lock;
+            this.torch = torch;
+            this.myId = id;
         }
 
     }
 
     static class Torch{
-        private int threadNum = 0;
-        public int getTurn(){
-            return threadNum;
+        public int threadId = 0;
+        int max;
+        Torch(int max){
+            this.max = max;
+        }
+
+        public void next(){
+            threadId++;
+            if(threadId>=max){
+                threadId = 0;
+            }
         }
     }
 }
