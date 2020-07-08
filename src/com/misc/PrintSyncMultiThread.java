@@ -23,7 +23,7 @@ public class PrintSyncMultiThread {
         arrays[3] = new int[]{3,4};
             printSync(arrays);
 
-            //Ouput
+            //Ouput : 1 2 5 3 5 6 9 4 7 8 14 10 11 
 
     }
 
@@ -41,6 +41,7 @@ public class PrintSyncMultiThread {
 
     }
 
+    //the Thread class
     static class Runner extends Thread{
 
         int[] array;
@@ -80,6 +81,7 @@ public class PrintSyncMultiThread {
 
     }
 
+    //Class for syncriniing the thread, the idea is that the thread with the Torch and matching id will be able to print the number
     static class Torch{
         public int threadId = 0;
         int max;

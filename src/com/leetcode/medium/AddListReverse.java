@@ -12,9 +12,6 @@ Explanation: 342 + 465 = 807.
 
  */
 
-import java.util.Stack;
-
-
 public class AddListReverse {
     //(2 -> 4 -> 3) + (5 -> 6 -> 9)
     public static void main(String[] args){
@@ -38,7 +35,6 @@ public class AddListReverse {
 
 
     public static ListNode addTwoNumbers(ListNode l1, ListNode l2) {
-
 
         int carry = 0;
         ListNode sum = null;
