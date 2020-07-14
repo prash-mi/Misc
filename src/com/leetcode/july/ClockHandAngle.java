@@ -11,7 +11,7 @@ public class ClockHandAngle {
         double hrPos = (360d* (hour+ (minutes/60d)))/12d;
         double minPos = 360d*minutes/60d;
 
-        return Math.abs(minPos - hrPos) > 180? (360 - Math.abs(minPos - hrPos)) : Math.abs(minPos - hrPos);
+        return Math.abs(minPos - hrPos) > 180? (360 - Math.abs(minPos - hrPos)) : Math.abs(minPos - hrPos);//need to return the smaller angle
 
     }
 }
