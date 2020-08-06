@@ -61,8 +61,33 @@ public class WordDictionary {
         return searchHelper(root, word, 0);
     }
 
-
+//cleaner implementation
  public boolean searchHelper(TrieNode cur, String word, int index) {
+
+        for(int i = index ; i < word.length(); i++){
+            char c = word.charAt(i);
+
+            if (cur.children.containsKey(c)){//matched the char and increment the pointer
+                cur = cur.children.get(c);
+            }else if(c == '.'){//it is a wild card!
+                Set<Character> children = cur.children.keySet();
+                for(Character ch: children){
+                    if (searchHelper(cur.children.get(ch), word, i+1)){
+                        return true;
+                    }
+
+                }
+                return false;//didn't find a match
+            }else {
+                return false;//didn't match
+            }
+        }
+
+        return cur.isComplete;//did the word finish here
+    }
+
+}
+/* public boolean searchHelper(TrieNode cur, String word, int index) {
 
         for(int i = index ; i < word.length(); i++){
             char c = word.charAt(i);
@@ -89,7 +114,7 @@ public class WordDictionary {
 
         return cur.isComplete;//did the word finish here
     }
-}
+}*/
 
  class TrieNode{
     char c;
