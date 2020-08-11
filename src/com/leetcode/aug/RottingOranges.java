@@ -9,6 +9,18 @@ import java.util.Queue;
 2 - Rotten
  */
 public class RottingOranges {
+
+    public static void main(String[] args){
+
+int[][] grid = {{2,1,1},
+                {1,1,0},
+                {0,1,1}};
+System.out.println(new RottingOranges().orangesRotting(grid));
+
+
+
+    }
+
     public int orangesRotting(int[][] grid) {
         if (grid == null || grid.length==0){
             return 0;
@@ -33,18 +45,18 @@ public class RottingOranges {
         for (int[] mov: moves){
             int nextX = cur.x + mov[0];
             int nextY = cur.y + mov[1];
-            if(isValid(nextX, nextY, grid) &&  grid[nextX][nextY]!= 0){
+            if(isValid(nextX, nextY, grid) &&  grid[nextX][nextY]== 1){
                 grid[nextX][nextY] = 2;//got rotten
                 nextNeighbours.add(new OrangePos(nextX, nextY));
 
             }
-            if (neighbours.isEmpty()){//explored all the neighbours at the current breath
-                minutes++;
-                neighbours = nextNeighbours;
-                nextNeighbours = new LinkedList<>();
-            }
-        }
 
+        }
+        if (neighbours.isEmpty() && !nextNeighbours.isEmpty()){//explored all the neighbours at the current breath
+            minutes++;
+            neighbours = nextNeighbours;
+            nextNeighbours = new LinkedList<>();
+        }
     }
 
 //check if there are no fresh cell (1)
