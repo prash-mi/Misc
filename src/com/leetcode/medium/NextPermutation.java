@@ -24,15 +24,13 @@ public class NextPermutation {
         }
         if (lowInd == -1){//array is in decreasing order, return in the increasing order
             Arrays.sort(nums);
-            System.out.println(nums);
             return;
         }
+
         //swap lowInd with the next biggest value
-        int curMin = nums[lowInd];
         int nextMinInd = lowInd+1;
         for (int i = lowInd+1; i < nums.length; i++){
-            if (nums[i] < curMin && nums[i] > nums[lowInd]){
-                curMin = nums[i];
+            if (nums[i] > nums[lowInd] && nums[i] <= nums[nextMinInd]){
                 nextMinInd = i;
             }
         }
@@ -44,7 +42,7 @@ public class NextPermutation {
             left++;
             right--;
         }
-        System.out.println(nums);
+        print(nums);
     }
 
     private void swap(int[] nums, int lowInd, int nextMinInd) {
@@ -52,4 +50,6 @@ public class NextPermutation {
         nums[lowInd] = nums[nextMinInd];
         nums[nextMinInd] = temp;
     }
+
+    private void print(int[] nums){for (int i:nums) System.out.print(i+", "); }
 }
