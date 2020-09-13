@@ -9,7 +9,7 @@ public class MinInRotatedAry {
         while (left < right){
 
             mid = left + (right-left)/2;
-            if (nums[mid]>=nums[0] && nums[mid] < nums[nums.length-1]){
+            if (nums[mid]>=nums[0] && nums[mid] < nums[nums.length-1]){//array not rotated
                 return nums[0];
             }else if (nums[mid] >= nums[0]){//go right
                 left=mid+1;
