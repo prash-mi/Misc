@@ -2,31 +2,23 @@ package com.leetcode.easy;
 
 
 public class TreeDiameter {
-
-    class DiameterHeight{
-        int diameter, height;
-        DiameterHeight(int diameter, int height){
-            this.diameter=diameter;
-            this.height=height;
-        }
+    class MaxDia{
+        int max = 0;
     }
-    public int diameterOfBinaryTree(TreeNode root) {
-
+    public int diameterOfBinaryTree(TreeNode cur){
+        MaxDia maxWrapper = new MaxDia();
+        diameterOfBinaryTreeHelper(cur, maxWrapper);
+        return maxWrapper.max;
     }
 
-    private DiameterHeight diameterOfBinaryTreeHelper(TreeNode cur){
-
-
+    private int diameterOfBinaryTreeHelper(TreeNode cur, MaxDia maxWrapper ){
         if(cur==null){
-            return new DiameterHeight(0,0);
+            return 0;
         }
+        int lHeight = diameterOfBinaryTreeHelper(cur.left, maxWrapper);
+        int rHeight = diameterOfBinaryTreeHelper(cur.right, maxWrapper);
 
-        DiameterHeight lHeightDia = diameterOfBinaryTreeHelper(cur.left);
-        DiameterHeight rHeightDia = diameterOfBinaryTreeHelper(cur.right);
-
-        int maxDiameter =
-
-
-        return res;
+        maxWrapper.max = Math.max(maxWrapper.max, (lHeight+rHeight));
+        return Math.max(lHeight, rHeight)+1;
     }
 }
