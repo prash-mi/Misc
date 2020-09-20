@@ -7,8 +7,7 @@ public class MaxSubArySum {
         }
         int runningMax = nums[0], maxSum = nums[0];
         for (int i=1; i<nums.length; i++){
-            int cur = nums[i];
-            runningMax = Math.max(runningMax+cur, cur);
+            runningMax = Math.max(runningMax+nums[i], nums[i]);
             maxSum = Math.max(runningMax, maxSum);
         }
         return maxSum;
