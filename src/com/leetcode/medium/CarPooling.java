@@ -24,20 +24,17 @@ public class CarPooling {
         }
         Arrays.sort(trips, (o1, o2) -> o1[1]-o2[1]);
         PriorityQueue<int[]> tripEnds = new PriorityQueue<>((o1, o2) -> o1[2]-o2[2]);//min priority queue ordered by the trip end points
-        tripEnds.add(trips[0]);
-
-        int curPassengers = trips[0][0];//passengers in the first trip
-        for (int i = 1; i <trips.length; i++){//start from 1 and compare it with the previous
+        int curPassengers = 0;
+        for (int i = 0; i <trips.length; i++){//start from 1 and compare it with the previous
             while (!tripEnds.isEmpty() && tripEnds.peek()[2]<=trips[i][1]){//the element with earliest endLocation <= current start location, meaning the passengers will now leave the vehicle
                 int[] endTrip = tripEnds.poll();
                 curPassengers -= endTrip[0];//passenger left the vehicle
             }
             curPassengers += trips[i][0];
-
+            tripEnds.add(trips[i]);
             if (curPassengers>capacity){
                 return false;
             }
-            tripEnds.add(trips[i]);
         }
     return true;
     }
