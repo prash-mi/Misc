@@ -29,7 +29,7 @@ public class GenerateBSTsWithNValues {
 
     public List<TreeNode> generateTrees(int n) {
         if (n<1){
-            return new ArrayList<>();//empty list as now tree is possible
+            return new ArrayList<>();//empty list as no tree is possible
         }
         return generateTreesHelper(1, n);
     }
