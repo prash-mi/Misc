@@ -21,7 +21,7 @@ public class MaxArea {
         System.out.println(new MaxArea().maxAreaOfIsland(grid3));
     }
 
-    //O(m*n) time and O(1) space
+    //O(m*n) time and O(?) space for recursion
     public int maxAreaOfIsland(int[][] grid) {
         if(grid==null||grid.length==0){
             return 0;
