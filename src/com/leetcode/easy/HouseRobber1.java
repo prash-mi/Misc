@@ -11,6 +11,6 @@ public class HouseRobber1 {
         for (int i =1; i < nums.length; i++){
             aux[i+1] = Math.max(aux[i], (aux[i-1]+nums[i]));//see if we are getting the max by skipping the current house (i+1); that is copy the previous value. Or
         }
-        return aux[aux.length-1];
+        return aux[aux.length - 1];
     }
 }
