@@ -31,7 +31,8 @@ public class PowerSet {
         }
             buffer.add(nums[cur]);
             powerSetHelper(nums, buffer, res, cur+1);
-            buffer.remove(Integer.valueOf(nums[cur]));//backtrack
+            //buffer.remove(Integer.valueOf(nums[cur]));//backtrack
+            buffer.remove(buffer.size()-1);
             powerSetHelper(nums, buffer, res, cur+1);
     }
 
