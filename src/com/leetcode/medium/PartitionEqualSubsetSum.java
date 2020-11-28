@@ -21,6 +21,8 @@ public class PartitionEqualSubsetSum {
         if (sum%2 ==1){//odd sum cannot be divided
             return false;
         }
+
+        ///practically a HashMap can be used as memo to remember result against remainingSum-rightIndex pair
         Boolean[][] memo = new Boolean[(sum/2)+1][nums.length];
         return canPartitionDFS(nums, sum/2, nums.length-1, memo);
     }
