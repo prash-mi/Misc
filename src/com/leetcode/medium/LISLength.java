@@ -20,7 +20,7 @@ public class LISLength {
         return getLisLen(nums, -1, 0, prevCurMemo);
     }
 
-
+//O(n^2) time and space
     int getLisLen(int[] nums, int prevIdx, int curIdx, int[][] prevCurMemo){
         if (curIdx >= nums.length){
             return 0;
