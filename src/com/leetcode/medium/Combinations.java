@@ -38,7 +38,7 @@ public class Combinations {
         buff.remove(buff.size()-1);//remove the last element
         generateCombinations(n, k, cur+1, buff, res);
     }
-    void generateCombinations2(int n, int k, int cur, List<Integer> buff, List<List<Integer>> res) {
+    void generateCombinations2(int n, int k, int cur, List<Integer> buff, List<List<Integer>> res) {//THIS PRINTS THE OUTPUT IN LEXICAL ORDER
         if (buff.size() == k) {
             res.add(new ArrayList<>(buff));//deep copy
             return;
