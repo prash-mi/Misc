@@ -34,7 +34,7 @@ public class BoundaryOfBinaryTree {
             left.add(cur.val);
         }
         getLeftTraversal(cur.left, root, left);
-        if (cur.left == null && cur!=root){
+        if (cur.left == null && cur!=root){//Go right iff there is no left node, we must not visit the tree towards the right of the root
             getLeftTraversal(cur.right, root, left);
         }
     }
@@ -58,7 +58,7 @@ public class BoundaryOfBinaryTree {
             right.add(cur.val);
         }
         getRightTraversal(cur.right, root, right);
-        if (cur.right == null && cur!= root){
+        if (cur.right == null && cur!= root){//Go left iff there is no right node, we must not visit the tree towards the left of the root
             getRightTraversal(cur.left, root, right);
         }
     }
