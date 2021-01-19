@@ -1,5 +1,6 @@
 package com.leetcode.easy;
 
+//LongestConsecutiveSequence increasing seq
 public class LongestConsecutiveSequence {
     class LongestLen{
         int len = 1;
