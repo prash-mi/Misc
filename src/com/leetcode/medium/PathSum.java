@@ -1,4 +1,6 @@
-package com.leetcode.easy;
+package com.leetcode.medium;
+
+
 
 public class PathSum {
     public boolean hasPathSum(TreeNode root, int sum) {
