@@ -1,4 +1,6 @@
-package com.leetcode.easy;
+package com.leetcode.medium;
+
+
 
 //LongestConsecutiveSequence increasing seq
 public class LongestConsecutiveSequence {
