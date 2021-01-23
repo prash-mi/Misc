@@ -4,7 +4,7 @@ Given a binary tree root and a linked list with head as the first node.
 Return True if all the elements in the linked list starting from the head correspond to some downward path connected in the binary tree otherwise return False.
  */
 public class BTreeSubPath {
-    //A linear time solution seems impossible for this problem, so we are matching the list starting every node in the tree, resulting in a O(m*n) Time and Space solution
+    //A linear time solution seems impossible for this problem, so we are matching the list starting every node in the tree, resulting in a worst case O(n/2 * Log(n) * m) Time complexity solution
     public boolean isSubPath(ListNode head, TreeNode cur) {
         if (head==null||cur==null){
             return false;
