@@ -35,8 +35,8 @@ public class CoinChange2 {
             return 1;
         }
 
-        int takeCurInd = changeCombination(coins, remainingSum-coins[ind], ind, memo);
-        int leaveCurInd = changeCombination(coins, remainingSum, ind+1, memo);
+        int takeCurInd = changeCombination(coins, remainingSum-coins[ind], ind, memo);//IMP: we do not increment ind here, as we should be able to pick the same coin again in the iteration
+        int leaveCurInd = changeCombination(coins, remainingSum, ind+1, memo);//we increment ind here, as we are skipping the current coin
 
         memo[ind][remainingSum] =  takeCurInd+leaveCurInd;
 
